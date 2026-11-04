@@ -11,31 +11,31 @@ Claude가 하는 일은 다음과 같습니다.
 
 보고서는 비개발자도 읽기 쉬운 한국어로, 프로젝트 폴더의 `docs/project-analysis-YYYY-MM-DD.md`에 저장됩니다. 분석하는 동안 프로젝트 코드는 고치지 않습니다.
 
-## 설치와 업데이트
+## 한 번만 쓰기 (설치 없이, 가장 간단)
 
-비공개 저장소라서 GitHub CLI(`gh`)에 `eycollective` 계정으로 로그인되어 있어야 합니다. 아래 명령 하나로 설치와 업데이트를 모두 합니다. 스킬 폴더가 없으면 새로 설치하고, 있으면 최신 내용을 받습니다. 몇 번을 실행해도 안전합니다.
+분석할 프로젝트 폴더에서 Claude Code를 열고 아래 문장을 그대로 보내면 됩니다. 아무것도 설치하지 않고, 그때그때 최신 원문을 받아 분석만 합니다. 알려 줄 정보가 있으면 맨 끝 `추가 정보:` 뒤에 적고, 없으면 비워 둡니다.
+
+```
+https://raw.githubusercontent.com/eycollective/project-analysis/main/SKILL.md 의 원문을 설치하지 말고 curl로 그대로 받아 읽은 뒤, 그 지시를 그대로 따라 이 폴더의 프로젝트를 분석해 줘. 추가 정보:
+```
+
+## 설치해서 쓰기 (자주 쓸 때)
+
+설치해 두면 `/project-analysis`나 "프로젝트 분석해줘" 같은 말로 바로 시작할 수 있습니다. 아래 명령 하나로 설치와 업데이트를 모두 합니다. 스킬 폴더가 없으면 새로 설치하고, 있으면 최신 내용을 받습니다. 몇 번을 실행해도 안전합니다.
 
 PowerShell:
 
 ```powershell
-if (Test-Path "$HOME\.claude\skills\project-analysis") { git -C "$HOME\.claude\skills\project-analysis" pull } else { gh repo clone eycollective/project-analysis "$HOME\.claude\skills\project-analysis" }
+if (Test-Path "$HOME\.claude\skills\project-analysis") { git -C "$HOME\.claude\skills\project-analysis" pull } else { git clone https://github.com/eycollective/project-analysis "$HOME\.claude\skills\project-analysis" }
 ```
 
 Git Bash:
 
 ```bash
-if [ -d ~/.claude/skills/project-analysis ]; then git -C ~/.claude/skills/project-analysis pull; else gh repo clone eycollective/project-analysis ~/.claude/skills/project-analysis; fi
+if [ -d ~/.claude/skills/project-analysis ]; then git -C ~/.claude/skills/project-analysis pull; else git clone https://github.com/eycollective/project-analysis ~/.claude/skills/project-analysis; fi
 ```
 
-`git pull`이 로그인 창을 띄우고 멈추면 `gh auth setup-git`을 한 번 실행한 뒤 다시 시도하세요.
-
-### Claude Code에게 한 번에 말하기 (설치·업데이트 + 분석 시작)
-
-분석할 프로젝트 폴더에서 Claude Code를 열고 아래 문장을 그대로 보내면 됩니다. 알려 줄 정보가 있으면 맨 끝 `추가 정보:` 뒤에 적습니다.
-
-```
-https://github.com/eycollective/project-analysis 를 ~/.claude/skills/project-analysis 에 설치해 줘(비공개 저장소라 gh로 받고, 이미 있으면 git pull로 업데이트). 그다음 그 폴더의 SKILL.md를 읽고 그대로 따라서 이 폴더의 프로젝트를 분석해 줘. 추가 정보:
-```
+설치한 뒤에는 Claude Code 세션을 새로 열어야 명령 목록에 `/project-analysis`가 나타납니다.
 
 ## 사용
 
